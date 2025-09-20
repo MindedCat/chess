@@ -52,11 +52,34 @@ def main():
     gs = chessEngine.GameState()
     loadImages()
 
+    sqSelected = ()              #selects empty square, last click of user
+    playerClicks = []            #playerclick tracker
+
     running = True
     while running:
         for event in pg.event.get():
-            if event.type == pg.QUIT:
+            if event.type == pg.QUIT:                #exit game
                 running = False
+            elif event.type == pg.MOUSEBUTTONDOWN:
+                location = pg.mouse.get_pos()        #(x,y) of mouse
+                col = location[0]//SQ_SIZE
+                row = location[1]//SQ_SIZE
+
+                if sqSelected == (row, col):         #undo action
+                    sqSelected = ()
+                    playerClicks = []
+                else:                                #update action
+                    sqSelected = (row, col)
+                    playerClicks.append(sqSelected)
+
+                if len(playerClicks) == 2:
+                    move = chessEngine.Move(playerClicks[0], playerClicks[1], gs.board)
+                    #------debug------
+                    print(move.getChessNotation())
+                    gs.makeMove(move)
+                    sqSelected = ()
+                    playerClicks = []
+
 
         drawGameState(screen, gs)
         clock.tick(MAX_FPS)
