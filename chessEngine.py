@@ -21,14 +21,51 @@ class GameState:
         self.whiteToMove = True
         self.moveLog = []
 
+    #takes a move as parameter and execute
+    #DO NOT WORK --> castling, pawn promotion, en-passant
     def makeMove(self, move):
         self.board[move.startRow][move.startCol] = "--"
         self.board[move.endRow][move.endCol] = move.pieceMoved
         self.moveLog.append(move)                               #log of moves
         self.whiteToMove = not self.whiteToMove                 #player swap turn
 
-class Move:
+    #undo last move
+    def undoMove(self):
+        if len(self.moveLog) != 0:
+            move = self.moveLog.pop()
+            self.board[move.startRow][move.startCol] = move.pieceMoved
+            self.board[move.endRow][move.endCol] = move.pieceCaptured
+            self.whiteToMove = not self.whiteToMove
 
+    #all moves considering checks
+    def getValidMoves(self):
+        return self.getAllPossibleMoves()                    #TEMP(does not consider check for now)
+
+    #all moves without considering checks
+    def getAllPossibleMoves(self):
+        moves = []
+        for row in range(len(self.board)):
+            for col in range(len(self.board[row])):
+                turn = self.board[row][col][0]
+
+                if (turn == "w" and self.whiteToMove) and (turn == "b" and not self.whiteToMove):
+                    piece = self.board[row][col][1]
+
+                    if piece == "P":
+                        self.getPawnMoves(row, col, moves)
+                    elif piece == "R":
+                        self.getRookMoves(row, col, moves)
+
+        return moves
+
+
+    #all chess pieces movement(Not Complete)
+    def getPawnMoves(self, row, col, moves):
+        pass
+    def getRookMoves(self, row, col, moves):
+        pass
+
+class Move:
     #maps keys to value
     #key : value
     ranksToRows = {"1": 7, "2": 6, "3": 5, "4": 4, "5": 3, "6": 2, "7": 1, "8": 0}
