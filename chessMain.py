@@ -83,7 +83,6 @@ def main():
                         gs.makeMove(move)
                         moveMade = True
 
-                    gs.makeMove(move)
                     sqSelected = ()
                     playerClicks = []
             #key handler
