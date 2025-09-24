@@ -48,8 +48,11 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     clock = pg.time.Clock()
     screen.fill(pg.Color("white"))
-
     gs = chessEngine.GameState()
+
+    validMoves = gs.getValidMoves()
+    moveMade = False                       #flag move made
+
     loadImages()
 
     sqSelected = ()              #selects empty square, last click of user
@@ -60,7 +63,8 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:                #exit game
                 running = False
-            elif event.type == pg.MOUSEBUTTONDOWN:
+            #mouse handler
+            elif event.type == pg.MOUSEBUTTONDOWN:   #mouse click gameplay
                 location = pg.mouse.get_pos()        #(x,y) of mouse
                 col = location[0]//SQ_SIZE
                 row = location[1]//SQ_SIZE
@@ -74,12 +78,22 @@ def main():
 
                 if len(playerClicks) == 2:
                     move = chessEngine.Move(playerClicks[0], playerClicks[1], gs.board)
-                    #------debug------
                     print(move.getChessNotation())
-                    gs.makeMove(move)
+                    if move in validMoves:
+                        gs.makeMove(move)
+                        moveMade = True
+
                     sqSelected = ()
                     playerClicks = []
+            #key handler
+            elif event.type == pg.KEYDOWN:           #undo a move
+                if event.key == pg.K_z:
+                    gs.undoMove()
+                    moveMade = True
 
+        if moveMade:
+            validMoves = gs.getValidMoves()
+            moveMade = False
 
         drawGameState(screen, gs)
         clock.tick(MAX_FPS)
