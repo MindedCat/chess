@@ -9,3 +9,8 @@ Python Chess Project
 ->added notaion
 ->gave movement logic
 ->gave mouse click logic
+
+----Version 0.3----
+->added undo move
+->added all possible moves(incomplete)
+->added valid moves(incomplete)
