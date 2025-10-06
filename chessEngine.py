@@ -18,6 +18,12 @@ class GameState:
             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]
         ])
 
+        self.moveFunctions = {'P': self.getPawnMoves,                #dictonary for the pieces
+                              'R': self.getRookMoves,
+                              'N': self.getKnightMoves,
+                              'B': self.getBishopMoves,
+                              'Q': self.getQueenMoves,
+                              'K': self.getKingMoves }
         self.whiteToMove = True
         self.moveLog = []
 
@@ -49,21 +55,58 @@ class GameState:
             for col in range(len(self.board[row])):
                 turn = self.board[row][col][0]
 
-                if (turn == "w" and self.whiteToMove) and (turn == "b" and not self.whiteToMove):
+                if (turn == "w" and self.whiteToMove) or (turn == "b" and not self.whiteToMove):
                     piece = self.board[row][col][1]
 
-                    if piece == "P":
-                        self.getPawnMoves(row, col, moves)
-                    elif piece == "R":
-                        self.getRookMoves(row, col, moves)
+                    self.moveFunctions[piece](row, col, moves)
 
         return moves
 
 
     #all chess pieces movement(Not Complete)
     def getPawnMoves(self, row, col, moves):
-        pass
+        #white's move
+        if self.whiteToMove:
+            if self.board[row-1][col] == "--":                                             #1 square move
+                moves.append(Move((row, col), (row-1, col), self.board))
+                if row == 6 and self.board[row-2][col] == "--":                            #2 square move
+                    moves.append(Move((row, col), (row-2, col), self.board))
+
+            if col-1 >= 0:                                                                 #left capture
+                if self.board[row-1][col-1][0] == 'b':
+                    moves.append(Move((row, col), (row-1, col-1), self.board))
+            if col+1 <= 7:
+                if self.board[row-1][col+1][0] == 'b':                                      #right capture
+                    moves.append(Move((row, col), (row-1, col+1), self.board))
+        #black's move
+        else:
+            if self.board[row+1][col] == "--":                                             #1 square move
+                moves.append(Move((row, col), (row+1, col), self.board))
+                if row == 1 and self.board[row+2][col] == "--":                            #2 square move
+                    moves.append(Move((row, col), (row+2, col), self.board))
+
+            if col-1 >= 0:                                                                 #left capture
+                if self.board[row+1][col-1][0] == 'w':
+                    moves.append(Move((row, col), (row+1, col-1), self.board))
+            if col+1 <= 7:
+                if self.board[row+1][col+1][0] == 'w':                                      #right capture
+                    moves.append(Move((row, col), (row+1, col+1), self.board))
+        # PAWN PROMOTION HERE
+
+
     def getRookMoves(self, row, col, moves):
+        pass
+
+    def getKnightMoves(self, row, col, moves):
+        pass
+
+    def getBishopMoves(self, row, col, moves):
+        pass
+
+    def getQueenMoves(self, row, col, moves):
+        pass
+
+    def getKingMoves(self, row, col, moves):
         pass
 
 class Move:
