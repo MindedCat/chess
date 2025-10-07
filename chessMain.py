@@ -82,9 +82,10 @@ def main():
                     if move in validMoves:
                         gs.makeMove(move)
                         moveMade = True
-
-                    sqSelected = ()
-                    playerClicks = []
+                        sqSelected = ()
+                        playerClicks = []
+                    else:                               #fix for 2-click issue
+                        playerClicks = [sqSelected]
             #key handler
             elif event.type == pg.KEYDOWN:           #undo a move
                 if event.key == pg.K_z:

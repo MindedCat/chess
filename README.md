@@ -19,3 +19,10 @@ Python Chess Project
 ->added all pieces function (placeholder)
 ->added dictionary for the function
 ->implemented pawnMove function (no rank promotion)
+
+----Version 0.5----
+->added rook move
+->added bishop move
+->added queen move
+->added king move
+->QOL improvements(2-click issue fixed)
