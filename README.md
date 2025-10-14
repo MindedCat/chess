@@ -26,3 +26,8 @@ Python Chess Project
 ->added queen move
 ->added king move
 ->QOL improvements(2-click issue fixed)
+
+----Version 0.6----
+->added check
+->added checkmate
+->added stalemate
