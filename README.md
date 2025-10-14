@@ -31,3 +31,7 @@ Python Chess Project
 ->added check
 ->added checkmate
 ->added stalemate
+
+----Version 0.8----
+->added pawn promotion
+->added en passant
