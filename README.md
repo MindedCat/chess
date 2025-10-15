@@ -46,7 +46,7 @@ Python Chess Project
 ->added game over
 ->BASE CHESS COMPLETE
 
-----Version 1.1----
+----Version 1.1.0----
 ->added simple AI(random movement)
 ->added AI vs AI
 ->added AI vs Human
