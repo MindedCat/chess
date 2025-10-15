@@ -38,3 +38,10 @@ Python Chess Project
 
 ----Version 0.9----
 ->added castling
+
+----Version 1.0----
+->added animation
+->added highlight
+->added game reset
+->added game over
+->BASE CHESS COMPLETE
