@@ -35,3 +35,6 @@ Python Chess Project
 ----Version 0.8----
 ->added pawn promotion
 ->added en passant
+
+----Version 0.9----
+->added castling
