@@ -5,6 +5,8 @@ main driver file
 """
 
 import pygame as pg
+
+import SmartMoveFinder
 import chessEngine
 
 WIDTH = HEIGHT = 400
@@ -104,18 +106,21 @@ def main():
 
     loadImages()
 
-    sqSelected = ()              #selects empty square, last click of user
-    playerClicks = []            #playerclick tracker
+    sqSelected = ()                #selects empty square, last click of user
+    playerClicks = []              #playerclick tracker
     gameOver = False
+    PlayerOne = True               #if player white == true, Ai white == false
+    PlayerTwo = False              #if player black == true, Ai black == false
 
     running = True
     while running:
+        humanTurn = (gs.whiteToMove and PlayerOne) or (not gs.whiteToMove and PlayerTwo)
         for event in pg.event.get():
             if event.type == pg.QUIT:                #exit game
                 running = False
             #mouse handler
             elif event.type == pg.MOUSEBUTTONDOWN:   #mouse click gameplay
-                if not gameOver:
+                if not gameOver and humanTurn:
                     location = pg.mouse.get_pos()        #(x,y) of mouse
                     col = location[0]//SQ_SIZE
                     row = location[1]//SQ_SIZE
@@ -152,6 +157,13 @@ def main():
                     playerClicks = []
                     moveMade = False
                     animate = False
+
+        #AI move finder
+        if not gameOver and not humanTurn:
+            AIMove = SmartMoveFinder.findRandomMove(validMoves)
+            gs.makeMove(AIMove)
+            moveMade = True
+            animate = True
 
         if moveMade:
             if animate:

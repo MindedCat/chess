@@ -45,3 +45,10 @@ Python Chess Project
 ->added game reset
 ->added game over
 ->BASE CHESS COMPLETE
+
+----Version 1.1----
+->added simple AI(random movement)
+->added AI vs AI
+->added AI vs Human
+->added Human vs AI
+->added Human vs Human
