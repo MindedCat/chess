@@ -109,8 +109,8 @@ def main():
     sqSelected = ()                #selects empty square, last click of user
     playerClicks = []              #playerclick tracker
     gameOver = False
-    PlayerOne = True               #if player white == true, Ai white == false
-    PlayerTwo = False              #if player black == true, Ai black == false
+    PlayerOne = True              #if player white == true, Ai white == false
+    PlayerTwo = False             #if player black == true, Ai black == false
 
     running = True
     while running:
@@ -160,7 +160,9 @@ def main():
 
         #AI move finder
         if not gameOver and not humanTurn:
-            AIMove = SmartMoveFinder.findRandomMove(validMoves)
+            AIMove = SmartMoveFinder.findBestMove(gs, validMoves)
+            if AIMove is None:
+                AIMove = SmartMoveFinder.findRandomMove(validMoves)
             gs.makeMove(AIMove)
             moveMade = True
             animate = True

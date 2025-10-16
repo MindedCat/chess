@@ -52,3 +52,7 @@ Python Chess Project
 ->added AI vs Human
 ->added Human vs AI
 ->added Human vs Human
+
+----Version 1.2.0----
+-> added greedy algorithm
+-> modified it to make it to minmax algorithm
