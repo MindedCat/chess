@@ -55,4 +55,4 @@ Python Chess Project
 
 ----Version 1.2.0----
 -> added greedy algorithm
--> modified it to make it to minmax algorithm
+-> modified it to make it to minmax algorithm.
