@@ -150,6 +150,7 @@ def main():
                     gs.undoMove()
                     moveMade = True
                     animate = False
+                    gameOver = False
                 if event.key == pg.K_r:             #reset the board
                     gs = chessEngine.GameState()
                     validMoves = gs.getValidMoves()
@@ -157,6 +158,7 @@ def main():
                     playerClicks = []
                     moveMade = False
                     animate = False
+                    gameOver = False
 
         #AI move finder
         if not gameOver and not humanTurn:

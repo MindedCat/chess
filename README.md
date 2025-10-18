@@ -56,3 +56,6 @@ Python Chess Project
 ----Version 1.2.0----
 -> added greedy algorithm
 -> modified it to make it to minmax algorithm.
+
+----Version 1.3.0----
+-> added minimax algorithm with recursion
